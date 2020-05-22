@@ -20,23 +20,11 @@ group_name = "group1"
 consumer_name = "consumer1"
 
 rc = RedisCluster(startup_nodes=STARTUP_NODES, decode_responses=True)
-#rc.xgroup_destroy(stream, group_name)
-
 
 ## If group not exists, create one
 group = rc.xinfo_groups(stream)
 if isExists(group, "name", group_name) == -1:
     rc.xgroup_create(stream, group_name, 0)
-
-## Check Pending Message
-print("## Check and work with Pending Message")
-pending_lists = rc.xpending_range(stream, group_name, '-', '+', 100, consumer_name)
-for msg in pending_lists:
-    data = rc.xrange(stream, msg['message_id'], msg['message_id'])
-    msg_id  = data[0][0]
-    raw_data = data[0][1]
-    doSomething(msg_id, raw_data)
-    rc.xack(stream, group_name, msg_id)
 
 ## Continue fetch data from stream
 print("## Continue fetching data")
