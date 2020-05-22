@@ -11,6 +11,7 @@
 2. stream-xread.py - read stream with xread
 3. stream-xreadgroup.py - demonstate xreadgroup and xack from stream
 4. stream-xpending - Reexecute pending message (Pending message is the messages that retrieved from xreadgroup but not xack)
+5. stream-xgroup_destroy - remove group from stream
 
 
 
