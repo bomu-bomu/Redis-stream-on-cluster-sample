@@ -15,7 +15,7 @@ rc = RedisCluster(startup_nodes=STARTUP_NODES, decode_responses=True)
 
 ## Continue fetch data from stream
 print("## Continue fetching data")
-data = rc.xread( streams = { stream : '0'}, count = 10) 
+data = rc.xread( streams = { stream : '0'})
 
 result_stream_name = data[0][0]
 messages = data[0][1]
